@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const books = require('./books.json');
+// const books = require('./books.json');
 const cors = require('cors')
 
 app.use(cors());
