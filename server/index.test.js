@@ -12,6 +12,8 @@ it('receives a successful response from the /api/books endpoint', async ()=> {
   expect(response.body[2]).toHaveProperty('ISBN');
   expect(response.body[2]).toHaveProperty('author');
   expect(response.body[2]).toHaveProperty('checkedOut');
+  expect(response.body[2].title).toBe('The Adventures of Zach and Jeff');
+
 });
 
 

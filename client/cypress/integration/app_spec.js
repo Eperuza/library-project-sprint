@@ -10,15 +10,25 @@ describe('home page meets user stories', () => {
 
     it('Displays a list of all books in the library', () => {
       cy.findByRole('list').should('have.class', 'bookList');
-      cy.findAllByRole('listitem').should('have.length', 5);
+    //   cy.findAllByRole('listitem').should('have.length', 5);
     })
 
 })
 
-describe('app obtains list of books from Express endpoint', () =>{
+describe('app obtains list of books from mock Express endpoint', () =>{
     beforeEach(()=> {
         cy.visit('/')
         cy.intercept('GET', 'http://localhost:3001/api/books', {body: books})
+    })
+
+    it('returns all of the books in the library', () => {
+        cy.findAllByRole('listitem').eq(2).should('have.text', 'The Adventures of Zach and Jeff')
+    })
+})
+
+describe('Displays books retrieved from api endpoint', () => {
+    beforeEach(() => {
+        cy.visit('/')
     })
 
     it('returns all of the books in the library', () => {
