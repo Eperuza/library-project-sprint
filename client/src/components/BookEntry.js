@@ -8,6 +8,7 @@ function BookEntry ({book, match}) {
     fetch(`http://localhost:3001/api/books/${match.params.id}`)
     .then(response => response.json())
     .then(result => setCurrentBook(result[0]))
+    return () => setCurrentBook({});
   }, [])
 
     return(
@@ -24,6 +25,7 @@ function BookEntry ({book, match}) {
           <div className="bookStatus">
               <h3>Status</h3>
               {currentBook.checked_out ? 'Checked Out' : 'Available'}
+              <div className="dueDateBack">{currentBook.due_date ? currentBook.due_date.slice(0,10) : ''}</div>
           </div>
         </div>
     )

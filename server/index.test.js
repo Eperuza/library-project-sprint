@@ -28,6 +28,9 @@ it('returns a specific book by id from the api/books/:bookId', async (done) => {
   expect(response.body[0]).toHaveProperty('author');
   expect(response.body[0]).toHaveProperty('checked_out');
   expect(response.body[0].title).toBe('Derek\'s Biography');
+  expect(response.body[0]).toHaveProperty('due_date');
+  expect(response.body[0]).toHaveProperty('checkout_date');
+  expect(response.body[0]).toHaveProperty('user_id');
   done();
 })
 
