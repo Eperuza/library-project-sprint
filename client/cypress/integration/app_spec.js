@@ -61,5 +61,6 @@ describe('dispalys the details for a particular book when the user clicks on tha
         cy.visit('/bookdetails/4');
         cy.get('.bookStatus').contains('Checked Out')
         cy.get('.dueDateBack').contains(/\d{4}-\d{2}-\d{2}/)
+        cy.get('.checkedOutBy').contains(/\d/)
     })
 })

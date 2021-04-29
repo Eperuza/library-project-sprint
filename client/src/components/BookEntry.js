@@ -25,7 +25,8 @@ function BookEntry ({book, match}) {
           <div className="bookStatus">
               <h3>Status</h3>
               {currentBook.checked_out ? 'Checked Out' : 'Available'}
-              <div className="dueDateBack">{currentBook.due_date ? currentBook.due_date.slice(0,10) : ''}</div>
+              <div className="dueDateBack">{currentBook.due_date ? `Due back on : ${currentBook.due_date.slice(0,10)}` : ''}</div>
+              <div className="checkedOutBy">{currentBook.user_id ? `This person has it: ${currentBook.user_id}` : ''}</div>
           </div>
         </div>
     )
