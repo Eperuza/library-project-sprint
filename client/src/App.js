@@ -40,11 +40,12 @@ let history = useHistory();
           </ul>
       </Route>
       
-     { books.length > 0 &&
-        <Route path ={`/bookdetails/${selectedBook.id}`}>
-        <BookEntry book={selectedBook}/>
+        <Route path ='/bookdetails/:id'
+          component={({match}) => {
+           return <BookEntry match={match} book={selectedBook}/>
+          }}>
         </Route> 
-     }
+
       </div>
     
   );

@@ -20,4 +20,8 @@ describe('Displays details about an individual book', () => {
     expect(screen.getByText(/isbn/i)).toBeTruthy();
     expect(screen.getByText(`${book.isbn}`)).toBeTruthy();
   })
+  it('displays the status of the book', () => {
+      expect(screen.getByText(/status/i)).toBeTruthy();
+      expect(screen.getByText(/available/i)).toBeTruthy();
+  })
 })
