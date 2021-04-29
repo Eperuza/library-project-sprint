@@ -7,7 +7,7 @@ function BookEntry ({book, match}) {
     book.id ? setCurrentBook(book) : 
     fetch(`http://localhost:3001/api/books/${match.params.id}`)
     .then(response => response.json())
-    .then(result => setCurrentBook(result))
+    .then(result => setCurrentBook(result[0]))
   }, [])
 
     return(

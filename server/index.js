@@ -13,4 +13,14 @@ app.get('/api/books', async (req, res) => {
   res.json(books);
 })
 
+app.get('/api/books/:bookId', async (req, res) => {
+
+  const book = await knex.select('*')
+  .from('books')
+  .where({id: parseInt(req.params.bookId)})
+ 
+  res.status(200)
+  res.json(book)
+})
+
 module.exports = app;
