@@ -24,4 +24,7 @@ describe('Displays details about an individual book', () => {
       expect(screen.getByText(/status/i)).toBeTruthy();
       expect(screen.getByText(/available/i)).toBeTruthy();
   })
+  it('displays a checkout button', () => {
+    expect(screen.getByRole('button')).toBeTruthy();
+  })
 })

@@ -1,4 +1,5 @@
 const request = require('supertest');
+const { get } = require('./index.js');
 const app = require('./index.js');
 
 it('receives a successful response from the /api/books endpoint', async (done)=> {
@@ -32,6 +33,22 @@ it('returns a specific book by id from the api/books/:bookId', async (done) => {
   expect(response.body[0]).toHaveProperty('checkout_date');
   expect(response.body[0]).toHaveProperty('user_id');
   done();
+})
+
+it('checks out a book', async (done) => {
+  const bookToCheckout = await request(app)
+  .get('/api/books/2')
+ 
+  expect(bookToCheckout.body[0].checked_out).toBe(false);
+  
+  const checkingOutBook= await request(app)
+  .get('/api/books/2/checkout/1')
+
+  const bookCheckedOut = await request(app)
+  .get('/api/books/2')
+
+  expect(bookCheckedOut.body[0].checked_out).toBe(true);
+  done()
 })
 
 

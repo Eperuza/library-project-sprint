@@ -23,4 +23,18 @@ app.get('/api/books/:bookId', async (req, res) => {
   res.json(book)
 })
 
+app.get('/api/books/:bookId/checkout/:userId', async (req, res) => {
+  const today = new Date();
+  const checkoutDate = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+  var due = today;
+  const dueDate = `${due.getFullYear()}-${due.getMonth()}-${due.getDate()}`;
+
+  await knex('books')
+  .where({id: req.params.bookId})
+  .update({user_id: req.params.userId, checked_out: true, checkout_date: checkoutDate, due_date: dueDate })
+
+  res.status(200)
+  res.send('Book checked out successfully!')
+})
+
 module.exports = app;
