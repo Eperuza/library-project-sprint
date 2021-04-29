@@ -1,12 +1,16 @@
 import './App.css';
 import {useState, useEffect} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, useHistory} from 'react-router-dom';
 import BookEntry from './components/BookEntry';
+import Book from './components/Book'
+
 
 
 // const books = require('./books.json')
 function App() {
 const [books, setBooks] = useState([]);
+const [selectedBook, setSelectedBook] = useState({});
+let history = useHistory();
 
   useEffect(()=>{
     fetch('http://localhost:3001/api/books')
@@ -14,6 +18,12 @@ const [books, setBooks] = useState([]);
     .then(data => setBooks(data))
     return () => setBooks([]);
   }, [])
+
+  const viewBookDetails = (event, book) => {
+    console.log(book.id);
+    setSelectedBook(book)
+    history.push(`/bookdetails/${book.id}`)
+  }
 
   return (
     
@@ -23,7 +33,7 @@ const [books, setBooks] = useState([]);
           <ul className='bookList'>
             {books.map(book => {
               return(
-                <li key= {book.id}>{book.title}</li>
+                <Book  key={book.id}  book={book} viewBookDetails={viewBookDetails}/>
               )
             })
             }
@@ -31,8 +41,8 @@ const [books, setBooks] = useState([]);
       </Route>
       
      { books.length > 0 &&
-        <Route path ={`/bookdetails/${books[0].id}`}>
-        <BookEntry book={books[0]}/>
+        <Route path ={`/bookdetails/${selectedBook.id}`}>
+        <BookEntry book={selectedBook}/>
         </Route> 
      }
       </div>

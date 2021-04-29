@@ -43,3 +43,12 @@ describe('displays a books details when user navigates to /books/<bookId>', () =
         cy.get('.bookTitle').should('have.text', `Derek's Biography`)
     })
 })
+
+describe('dispalys the details for a particular book when the user clicks on that book', () => {
+
+    it('redirects the user to the book details that they clicked on',() => {
+        cy.visit('/');
+        cy.findAllByRole('listitem').eq(2).click()
+        cy.url().should('have.text', '/bookdetails/3')
+    })
+})
