@@ -38,8 +38,8 @@ describe('Displays books retrieved from api endpoint', () => {
 
 describe('displays a books details when user navigates to /books/<bookId>', () => {
 
-    it('navigates to the details about a particular book', () => {
-        cy.visit('/bookdetails/1')
+    it('navigates to the details about a particular book', async () => {
+        await cy.visit('/bookdetails/1')
         cy.get('.bookTitle').should('have.text', `Derek's Biography`)
     })
 })
@@ -49,6 +49,7 @@ describe('dispalys the details for a particular book when the user clicks on tha
     it('redirects the user to the book details that they clicked on',() => {
         cy.visit('/');
         cy.findAllByRole('listitem').eq(2).click()
-        cy.url().should('have.text', '/bookdetails/3')
+        const url =cy.url()
+        url.should('eq', 'http://localhost:3000/bookdetails/3')
     })
 })
