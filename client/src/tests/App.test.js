@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import App from '../App';
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-const books = require('./books.json');
+const books = require('../books.json');
 
 
 beforeEach(()=>{
