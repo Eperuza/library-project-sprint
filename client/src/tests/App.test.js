@@ -3,10 +3,11 @@ import App from '../App';
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 const books = require('../books.json');
+import { BrowserRouter as Router } from 'react-router-dom';
 
 
 beforeEach(()=>{
-  render(<App />);
+  render(<Router><App /></Router>);
 })
 
 

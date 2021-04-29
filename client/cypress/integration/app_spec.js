@@ -39,7 +39,7 @@ describe('Displays books retrieved from api endpoint', () => {
 describe('displays a books details when user navigates to /books/<bookId>', () => {
 
     it('navigates to the details about a particular book', () => {
-        cy.visit('/books/1')
+        cy.visit('/bookdetails/1')
         cy.get('.bookTitle').should('have.text', `Derek's Biography`)
     })
 })
