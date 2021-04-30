@@ -43,3 +43,7 @@ test('has a text input for a user ID', () => {
   const userIdInput = screen.getByRole('textbox');
   expect(userIdInput).toBeInTheDocument();
 })
+
+test('has a button to submit a user ID', () => {
+  expect(screen.getByRole('button')).toBeInTheDocument();
+})

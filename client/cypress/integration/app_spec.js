@@ -77,9 +77,14 @@ describe('dispalys the details for a particular book when the user clicks on tha
 })
 
 describe("Allows user to input user ID", () => {
-    it("displays an input field for user ID on the main page", () => {
+    it("allows the user to input ID and login", () => {
         cy.visit('/');
-        cy.findByRole('textbox').should('exist');
-
+        cy.findByRole('textbox').type('4');
+        cy.get('.userLogin').click();
+        cy.findByRole('textbox').should('not.exist')
+    })
+    it('allows the user to logout', () => {
+        cy.get('.userLogout').click();
+        cy.findByRole('textbox').should('exist')
     })
 })
