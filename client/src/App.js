@@ -30,6 +30,7 @@ let history = useHistory();
       <div className="App">
         <Route exact path ='/'>
           <h1>SDI Library</h1>
+          <label>User ID: <input type="text"/></label>
           <ul className='bookList'>
             {books.map(book => {
               return(

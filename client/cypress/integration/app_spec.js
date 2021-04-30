@@ -57,18 +57,29 @@ describe('dispalys the details for a particular book when the user clicks on tha
         cy.get('.bookStatus').contains('Available')
     })
 
-    it('indicates the due date and userid of checkedout book', () => {
-        cy.visit('/bookdetails/4');
+    // it('indicates the due date and userid of checkedout book', () => {
+    //     cy.visit('/bookdetails/4');
+    //     cy.wait(500);
+    //     cy.get('.bookStatusContainer').contains('Checked Out')
+    //     cy.get('.dueDateBack').contains(/\d{4}-\d{2}-\d{2}/)
+    //     cy.get('.checkedOutBy').contains(/\d/)
+    // })
+
+    it('checks out the book when a user clicks the checkout button', () => {
+        cy.visit('/bookdetails/2');
+        cy.wait(500);
+        cy.get('.btn').click();
         cy.wait(500);
         cy.get('.bookStatusContainer').contains('Checked Out')
         cy.get('.dueDateBack').contains(/\d{4}-\d{2}-\d{2}/)
         cy.get('.checkedOutBy').contains(/\d/)
     })
+})
 
-    it('checks out the book when a user clicks the checkout button', () => {
-        cy.visit('/bookdetails/2');
-        cy.wait(500);
-        cy.get('.btn').click()
-        cy.get('.bookStatus').contains('Checked Out')
+describe("Allows user to input user ID", () => {
+    it("displays an input field for user ID on the main page", () => {
+        cy.visit('/');
+        cy.findByRole('textbox').should('exist');
+
     })
 })

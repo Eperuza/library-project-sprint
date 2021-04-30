@@ -38,3 +38,8 @@ test('returns all of the books in the library' , async () =>{
   expect(bookList.length).toBe(5);
   expect(bookList[2].innerHTML).toBe("The Adventures of Zach and Jeff")
 })
+
+test('has a text input for a user ID', () => {
+  const userIdInput = screen.getByRole('textbox');
+  expect(userIdInput).toBeInTheDocument();
+})
