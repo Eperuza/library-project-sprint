@@ -16,6 +16,7 @@ function BookEntry ({book, match}) {
     fetch(`http://localhost:3001/api/books/${currentBook.id}/checkout/${userId}`)
     .then(response => response.json())
     .then(result => console.log(result))
+    .then(setCurrentBook(currentBook))
   }
 
     return(
