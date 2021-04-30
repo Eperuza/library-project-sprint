@@ -88,3 +88,14 @@ describe("Allows user to input user ID", () => {
         cy.findByRole('textbox').should('exist')
     })
 })
+
+describe("Tells user they have the book if it is checked out to them", () => {
+    it("Displays the text 'You have it' if you have the book checked out already", () => {
+        cy.visit('/')
+        cy.findByRole('textbox').type('3')
+        cy.findByRole('button').click()
+        cy.visit('/bookdetails/3')
+        cy.wait(500)
+        cy.findByText('You have it').should('exist')
+    })
+})

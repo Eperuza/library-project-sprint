@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Cookies, useCookies } from 'react-cookie';
 
 function BookEntry ({book, match}) {
   const [ currentBook, setCurrentBook ] = useState({});
   const [ checkOutStatus, setCheckOutStatus ] = useState(book.checked_out);
-  const userId = 1;
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
+  const userId = cookies.user;
 
   useEffect( () => {
     fetch(`http://localhost:3001/api/books/${currentBook.id}/checkout/${userId}`)
@@ -46,8 +48,8 @@ function BookEntry ({book, match}) {
                 <div className='bookStatus'>Available <button className='btn' onClick={() => changeBookStatus()}>Checkout</button></div> 
               }
               
-              <div className="dueDateBack">{currentBook.due_date ? `Due back on : ${currentBook.due_date.slice(0,10)}` : ''}</div>
-              <div className="checkedOutBy">{currentBook.user_id ? `This person has it: ${currentBook.user_id}` : ''}</div>
+              <div className="dueDateBack">{currentBook.due_date ? `Come check back after: ${currentBook.due_date.slice(0,10)}` : ''}</div>
+              <div className="checkedOutBy">{currentBook.user_id ? currentBook.user_id!==parseInt(cookies.user) ? `This person has it: ${currentBook.user_id}` : 'You have it' : ''}</div>
           </div>
         </div>
     )
