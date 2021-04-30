@@ -34,8 +34,10 @@ app.get('/api/books/:bookId/checkout/:userId', async (req, res) => {
   .where({id: req.params.bookId})
   .update({user_id: req.params.userId, checked_out: true, checkout_date: checkoutDate, due_date: dueDate })
 
+  const updatedBook = await knex('books')
+  .select('*').where({id: req.params.bookId})
   res.status(200)
-  res.send('Book checked out successfully!')
+  res.json(updatedBook)
 })
 
 module.exports = app;

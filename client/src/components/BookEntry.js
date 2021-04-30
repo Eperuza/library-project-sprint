@@ -2,21 +2,31 @@ import { useState, useEffect } from 'react';
 
 function BookEntry ({book, match}) {
   const [ currentBook, setCurrentBook ] = useState({});
+  const [ checkOutStatus, setCheckOutStatus ] = useState(book.checked_out);
   const userId = 1;
 
   useEffect( () => {
-    book.id ? setCurrentBook(book) : 
-    fetch(`http://localhost:3001/api/books/${match.params.id}`)
+    fetch(`http://localhost:3001/api/books/${currentBook.id}/checkout/${userId}`)
     .then(response => response.json())
     .then(result => setCurrentBook(result[0]))
+  }, [checkOutStatus])
+
+  useEffect( () => {
+    // book.id ? (setCurrentBook(book) && setCheckOutStatus(book.checked_out)) : 
+    fetch(`http://localhost:3001/api/books/${match.params.id}`)
+    .then(response => response.json())
+    .then(result => {
+      console.log(result[0]);
+      setCurrentBook(result[0]);
+    })
+    .catch(err => console.error(err));
     return () => setCurrentBook({});
   }, [])
 
-  function checkoutBook() {
-    fetch(`http://localhost:3001/api/books/${currentBook.id}/checkout/${userId}`)
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .then(setCurrentBook(currentBook))
+  function changeBookStatus() {
+    const is_checked_out = currentBook.checked_out;
+    console.log(" HEYYYYY", is_checked_out);
+    setCheckOutStatus(!is_checked_out);
   }
 
     return(
@@ -33,7 +43,7 @@ function BookEntry ({book, match}) {
           <div className="bookStatusContainer">
               <h3>Status</h3>
               {currentBook.checked_out ? 'Checked Out' : 
-                <div className='bookStatus'>Available <button className='btn' onClick={() => checkoutBook()}>Checkout</button></div> 
+                <div className='bookStatus'>Available <button className='btn' onClick={() => changeBookStatus()}>Checkout</button></div> 
               }
               
               <div className="dueDateBack">{currentBook.due_date ? `Due back on : ${currentBook.due_date.slice(0,10)}` : ''}</div>
